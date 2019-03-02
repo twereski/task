@@ -16,11 +16,10 @@ public class RepositoryController {
     private final GithubFacade facade;
 
     @GetMapping("/{userName}")
-    List<RepositoryDto> exchange(@PathVariable("userName") String userName,
+    List<RepositoryDto> getReposByUser(@PathVariable("userName") String userName,
                                  @RequestParam(value = "actual", required = false) Boolean actual,
                                  @RequestParam(value = "sort", required = false, defaultValue = "ASC") Sort sort) {
         return facade.getRepos(userName, actual, sort);
-//        return new RepositoriesInfoDto();
     }
 
 }
