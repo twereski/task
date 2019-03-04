@@ -4,7 +4,6 @@ import com.twereski.task.app.dto.RepositoryDto;
 import com.twereski.task.app.dto.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ClockProvider;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,8 +20,8 @@ public class GithubFacade {
     private final Clock clock;
     private final Invoker invoker;
 
-    public GithubFacade(ClockProvider clockProvider, Invoker invoker) {
-        this.clock = clockProvider.getClock();
+    public GithubFacade(Clock clock, Invoker invoker) {
+        this.clock = clock;
         this.invoker = invoker;
     }
 

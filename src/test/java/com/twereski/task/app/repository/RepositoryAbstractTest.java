@@ -7,7 +7,6 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
@@ -15,18 +14,16 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.validation.ClockProvider;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @Ignore
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public abstract class RepositoryAbstractTest {
@@ -39,8 +36,6 @@ public abstract class RepositoryAbstractTest {
     @Rule
     public WireMockRule wireMockRule = new WireMockRule(8089);
 
-    @MockBean
-    protected ClockProvider clockProvider;
 
     @Before
     public void setup() throws Exception {
@@ -49,10 +44,6 @@ public abstract class RepositoryAbstractTest {
         headers.add("Authorization", "Basic dG9tOmFiY2Rl");
         headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
 
-        ZonedDateTime now = ZonedDateTime.of(
-                LocalDateTime.of(2019, 3, 3, 0, 0, 0),
-                ZoneId.systemDefault()
-        );
     }
 
     protected void stabGithub(String filePath) {
