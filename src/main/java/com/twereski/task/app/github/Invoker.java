@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Log4j2
 @Service
-public class Invoker {
+class Invoker {
 
     @Value("${github.api.url}")
     private String url;
