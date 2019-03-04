@@ -2,9 +2,9 @@ package com.twereski.task.app.github;
 
 import com.twereski.task.app.dto.RepositoryDto;
 import com.twereski.task.app.dto.Sort;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ClockProvider;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 import static com.twereski.task.app.github.UserReposPredicate.isCompatibleWithUpdateFilter;
 import static com.twereski.task.app.github.UserReposPredicate.isOlderThanDate;
 
-@AllArgsConstructor
 @Service
 public class GithubFacade {
 
@@ -21,6 +20,11 @@ public class GithubFacade {
 
     private final Clock clock;
     private final Invoker invoker;
+
+    public GithubFacade(ClockProvider clockProvider, Invoker invoker) {
+        this.clock = clockProvider.getClock();
+        this.invoker = invoker;
+    }
 
     public List<RepositoryDto> getRepos(String userName, Boolean actual, Sort sort) {
         LocalDateTime updatedDate = LocalDateTime.now(clock).minusMonths(monthUpdated);
