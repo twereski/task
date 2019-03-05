@@ -24,7 +24,7 @@ public class RepositoryAboveTreeMonthTest extends RepositoryAbstractTest {
         assertThat(body).isNotNull();
         assertThat(body.size()).isEqualTo(2);
         assertThat(body).filteredOn(
-                r -> r.getName().equals("euro-draw-simulator") && !r.isUpdatedMoreThanThreeMonthAgo()).isNotEmpty();
+                r -> r.getName().equals("euro-draw-simulator") && r.isUpdatedLessThanThreeMonthAgo()).isNotEmpty();
         assertThat(body).filteredOn(r -> r.getName().equals("pretius")).isEmpty();
 
     }

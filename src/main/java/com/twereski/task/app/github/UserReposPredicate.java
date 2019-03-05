@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public class UserReposPredicate {
+class UserReposPredicate {
 
-    public static Predicate<UserReposDto> isCompatibleWithUpdateFilter(Boolean fresh, LocalDateTime dateUpdated) {
+    static Predicate<UserReposDto> isCompatibleWithUpdateFilter(Boolean fresh, LocalDateTime dateUpdated) {
         return r -> {
             if (Objects.isNull(fresh)) {
                 return true;
@@ -21,8 +21,8 @@ public class UserReposPredicate {
         };
     }
 
-    public static Predicate<UserReposDto> isOlderThanDate(LocalDateTime date) {
-        return r -> r.getUpdated_at().isBefore(date);
+    static Predicate<UserReposDto> isEarlierThanDate(LocalDateTime date) {
+        return r -> r.getUpdated_at().isAfter(date);
     }
 
 }

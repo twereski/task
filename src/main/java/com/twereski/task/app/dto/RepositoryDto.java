@@ -15,5 +15,5 @@ public class RepositoryDto {
     private String language;
     private LocalDateTime createDate;
     private LocalDateTime lastModificationDate;
-    private boolean updatedMoreThanThreeMonthAgo;
+    private boolean updatedLessThanThreeMonthAgo;
 }

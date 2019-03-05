@@ -11,7 +11,7 @@ import java.time.ZoneId;
 
 @Profile("test")
 @Configuration
-public class ClockConfigTest {
+public class ClockConfigForTest {
 
     @Bean
     @Primary

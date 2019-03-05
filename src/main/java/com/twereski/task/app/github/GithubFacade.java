@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.twereski.task.app.github.UserReposPredicate.isCompatibleWithUpdateFilter;
-import static com.twereski.task.app.github.UserReposPredicate.isOlderThanDate;
+import static com.twereski.task.app.github.UserReposPredicate.isEarlierThanDate;
 
 @Service
 public class GithubFacade {
@@ -27,12 +27,13 @@ public class GithubFacade {
 
     public List<RepositoryDto> getRepos(String userName, Boolean actual, Sort sort) {
         LocalDateTime updatedDate = LocalDateTime.now(clock).minusMonths(monthUpdated);
+
         return invoker.getUserRepositories(userName, sort)
                 .stream()
                 .filter(isCompatibleWithUpdateFilter(actual, updatedDate))
                 .map( r ->
                         new RepositoryDto(r.getName(), r.getLanguage(), r.getCreated_at(), r.getUpdated_at(),
-                                isOlderThanDate(updatedDate).test(r))
+                                isEarlierThanDate(updatedDate).test(r))
                 )
                 .collect(Collectors.toList());
     }
