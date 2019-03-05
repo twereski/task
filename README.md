@@ -8,7 +8,13 @@ the indicated Github user (sent as a parameter)
 8080
 
 ## End-points docs:
-http://localhost:8080/v2/api-docs
+``/v2/api-docs``
+
+## Usage example:
+```
+curl -X GET "http://user:pass@localhost:8080/repository/twereski?actual=true&sort=DESC" -H  "accept: */*"
+```
+
 
 ## Run app:
 ``
@@ -34,7 +40,7 @@ by adding an entry to the file:
 ```
 **Password encode** - _BCryptPasswordEncoder_, **strength:11**
 
-test user:  
+**test user**:  
 username: tom  
 password: abcde
 
